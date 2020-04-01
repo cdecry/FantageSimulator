@@ -1,0 +1,1938 @@
+<html>
+
+  <head>
+
+    <title>CC Fantage Simulator</title>
+    <embed src="downtownhalloween.mp3" autostart="true" loop="true">
+    <link href="https://fonts.googleapis.com/css?family=Concert+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet">
+    <style>
+      body{
+      }
+      :root {
+        --updateV: 0%;
+      }
+      #screen {
+        top: 100px;
+        left: 22%;
+        height: 520px;
+        width: 800px;
+        position: absolute;
+        background-image: url(downtownnight.png);
+        background-position: 0%;
+        background-size: 127%;
+        background-repeat: no-repeat;
+        border: 2px solid grey;
+      }
+      #fog {
+        height: 520px;
+        width: 800px;
+        position: absolute;
+        background-image: url(blackfog.png);
+        background-position: 0%;
+        background-size: 127%;
+        background-repeat: no-repeat;
+      }
+      .user{
+        height: 200px;
+        width: 150px;
+        top: 300px;
+        border: none;
+        background-repeat: no-repeat;
+        position: absolute;
+      }
+      #userN{
+        background-image: url(user.png);
+      }
+      #costume {
+      }
+      #hair {
+        background-image: url(boyHairShaggyBlonde.png);
+      }
+      #top {
+        background-image: url(boyTopRedOrange.png);
+      }
+      #bot {
+        background-image: url(boyBotRedSnake.png);
+      }
+      #board {
+        background-image: url(puppyBoard.png);
+      }
+      #acc {
+      }
+      #userSpacer{
+        position: relative;
+        float: left;
+        top: 360px;
+        height: 100px;
+        width: 50px;
+      }
+      #clickUser {
+        position: relative;
+        float: left;
+        top: 360px;
+        height: 100px;
+        width: 50px;
+      }
+      #clickUser:hover{
+        border: 0px solid red;
+      }
+      #idfoneBorder{
+        top: 7.5%;
+        left: 12%;
+        width: 76%;
+        height: 85%;
+        background-color: #3C50AB;
+        position: absolute;
+        border-radius: 3%;
+        border-style: groove;
+      }
+      #idfoneContainer{
+        top: 2%;
+        left: 1%;
+        width: 98%;
+        height: 96%;
+        background-color: #1F2232;
+        position: absolute;
+        border-radius: 3%;
+      }
+      #idfone{
+        top: 12%;
+        left: 7%;
+        width: 90%;
+        height: 82%;
+        background-color: #23437F;
+        position: absolute;
+        border-radius: 3%;
+        background-image: url(idfoneDefaultBg.jpg);
+      }
+      #userTitle{
+        font-family: 'Kaushan Script', cursive;
+        color: yellow;
+        font-size: 25px;
+        position: absolute;
+        left: 14%;
+        top: -6%;
+        text-shadow: -1px -1px 0 #773300, 1px -1px 0 #773300, -1px 1px 0 #773300, 3px 3px 0 #773300;
+      }
+      .userIdfone{
+        font-family: 'Concert One', cursive;
+        color: white;
+        font-size: 25px;
+        position: absolute;
+        left: 14%;
+        top: 3%;
+        text-shadow: -1.5px -1.5px 0 #3B809A, 1.5px -1.5px 0 #3B809A, -1.5px 1.5px 0 #3B809A, 1.5px 1.5px 0 #3B809A;
+      }
+      #idfoneStar{
+        position: absolute;
+        top: 0%;
+        left: 2%;
+        height: 55px;
+        width: 55px;
+      }
+      #idfoneAvatar{
+        top: 20%;
+        left: 60%;
+        position: absolute;
+      }
+      #idfoneBody {
+        position: absolute;
+        background-image: url(user.png);
+        width: 150px;
+        height: 200px;
+      }
+      #infoBar{
+        height: 15%;
+        width: 90%;
+        background-color: rgba(129, 129, 130, 0.5);
+        border-radius: 100px 100px 100px 100px;
+        position: absolute;
+        top: 83%;
+        left: 5%;
+      }
+      #level {
+        position: absolute;
+        top: 10%;
+        left: 20px;
+        font-family: 'Concert One', cursive;
+        color: white;
+        font-size: 30px;
+      }
+      #levelVal {
+        position: absolute;
+        top: -100%;
+        left: 110%;
+        font-size: 30px;
+        font-family: 'Kaushan Script', cursive;
+        color: yellow;
+        text-shadow: -1px -1px 0 #773300, 1px -1px 0 #773300, -1px 1px 0 #773300, 3px 3px 0 #773300;
+      }
+      #starsEcoins {
+        position: absolute;
+        left: 55%;
+        top: 6%;
+        height: 40px;
+        width: 21.7px;
+      }
+      #starsLabel {
+        position: absolute;
+        top: -25%;
+        left: 60%;
+        font-family: 'Concert One', cursive;
+        color: white;
+        font-size: 15px;
+      }
+      #ecoinsLabel {
+        position: absolute;
+        top: 16%;
+        left: 60%;
+        font-family: 'Concert One', cursive;
+        color: white;
+        font-size: 15px;
+      }
+      #closeIdfone {
+        position: absolute;
+        right: 4%;
+        top: 3%;
+        background-color: #797979;
+        border-radius: 100%;
+        color: red;
+        height: 25px;
+        width: 25px;
+        border: 1px solid black;
+      }
+      #closeIdfone:hover{
+        border: 0px solid red;
+      }
+      .actions {
+        background-color: blue;
+        height: 40px;
+        width: 40px;
+        border-radius: 10px;
+        top: 92%;
+        left: 82%;
+        position: absolute;
+        opacity: 0.7;
+        color: white;
+        line-height: 40px;
+      }
+      .inventory{
+        background-color: blue;
+        height: 40px;
+        width: 40px;
+        border-radius: 10px;
+        top: 92%;
+        left: 24%;
+        position: absolute;
+        opacity: 0.7;
+        color: white;
+        line-height: 40px;
+      }
+      .wave {
+        position: absolute;
+        top: 265px;
+        left: 80%;
+        font-size: 30px;
+      }
+      .timer{
+        background-color: black;
+        height: 20px;
+        width: 20px;
+        position: absolute;
+      }
+      #chat {
+        position: absolute;
+        top: 95%;
+        left: 30%;
+        width: 300px;
+        height: 20px;
+        color: white;
+        background-color: black;
+        opacity: 0.7;
+      }
+      .send {
+        position: absolute;
+        top: 95%;
+        left: 64%;
+        width: 80px;
+        height: 20px;
+        color: white;
+        background-color: blue;
+        opacity: 0.9;
+      }
+      .message {
+        position: relative;
+        height: auto;
+        width: auto;
+        background-color: white;
+        opacity: 0;
+        color: black;
+        border-radius: 5px;
+        font-family: "Times New Roman", Times, serif;
+        font-size: 14px;
+      }
+      .inventOpen{
+        top: 2%;
+        left: 3%;
+        height: 96%;
+        width: 94%;
+        opacity: 1;
+        position: absolute;
+        background-color: blue;
+        border: 1px solid white;
+        background-size: 70%;
+        border-radius: 5px;
+      }
+      #closeInvent {
+        top: 1%;
+        right: 1%;
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        background-color: white;
+        border-radius: 100%;
+      }
+      #closeInvent:hover{
+        border: 1px solid red;
+      }
+      .inventBg {
+        top: 7%;
+        left: 1%;
+        height: 92%;
+        width: 98%;
+        opacity: 1;
+        position: absolute;
+        background-color: white;
+        background-size: 70%;
+        border-radius: 5px;
+      }
+      .inventTabs {
+        top: 10%;
+        width: 25%;
+        height: 7%;
+        font-size: 20px;
+      }
+      .inventBg2 {
+        top: 7%;
+        left: 0.3%;
+        height: 92%;
+        width: 99.4%;
+        opacity: 1;
+        position: absolute;
+        background-color: #9ee4ff;
+        background-size: 70%;
+      }
+      .clothesContainer {
+        top: 7%;
+        left: 1%;
+        height: 90%;
+        width: 75%;
+        position: absolute;
+        background-color: white;
+        border: 1px solid blue;
+        background-size: 70%;
+        opacity: 1;
+        overflow-y: scroll;
+      }
+      .hairContainer {
+        top: 7%;
+        left: 1%;
+        height: 90%;
+        width: 75%;
+        position: absolute;
+        background-color: white;
+        border: 1px solid blue;
+        background-size: 70%;
+        opacity: 1;
+      }
+      .boardContainer {
+        top: 7%;
+        left: 1%;
+        height: 90%;
+        width: 75%;
+        position: absolute;
+        background-color: white;
+        border: 1px solid blue;
+        background-size: 70%;
+        opacity: 1;
+      }
+      .accessoryContainer {
+        top: 7%;
+        left: 1%;
+        height: 90%;
+        width: 75%;
+        position: absolute;
+        background-color: white;
+        border: 1px solid blue;
+        background-size: 70%;
+        opacity: 1;
+      }
+      .avatarContainer {
+        top: 7%;
+        right: 1%;
+        height: 90%;
+        width: 22%;
+        position: absolute;
+        background-color: white;
+        border: 1px solid blue;
+        background-size: 70%;
+        opacity: 1;
+      }
+      .avatarPreview {
+        height: 200px;
+        width: 150px;
+        border: none;
+        background-repeat: no-repeat;
+        position: absolute;
+        background-image: url('user.png')
+      }
+      #hairPre{
+        height: 200px;
+        width: 150px;
+        border: none;
+        background-repeat: no-repeat;
+        position: absolute;
+      }
+      #topPre {
+        height: 200px;
+        width: 150px;
+        border: none;
+        background-repeat: no-repeat;
+        position: absolute;
+      }
+      #botPre {
+        height: 200px;
+        width: 150px;
+        border: none;
+        background-repeat: no-repeat;
+        position: absolute;
+      }
+      #costumePre {
+        height: 200px;
+        width: 150px;
+        border: none;
+        background-repeat: no-repeat;
+        position: absolute;
+      }
+      #boardPre {
+        height: 200px;
+        width: 150px;
+        border: none;
+        background-repeat: no-repeat;
+        position: absolute;
+      }
+      #accPre {
+        height: 200px;
+        width: 150px;
+        border: none;
+        background-repeat: no-repeat;
+        position: absolute;
+      }
+      #hairTab:hover{
+        border: 1px solid red;
+      }
+      #clothesTab:hover {
+        border: 1px solid red;
+      }
+      #boardTab:hover {
+        border: 1px solid red;
+      }
+      #accessoryTab:hover {
+        border: 1px solid red;
+      }
+      .block {
+        background-color: black;
+        opacity: 0.7;
+        height: 520px;
+        width: 800px;
+        position: absolute;
+      }
+      .historyB {
+        background-color: blue;
+        height: 7.8%;
+        width: 5%;
+        border-radius: 10px;
+        top: 92%;
+        left: 76%;
+        position: absolute;
+        opacity: 0.7;
+        color: white;
+        line-height: 40px;
+      }
+      .msgBorder {
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 69%;
+        font-size: 30px;
+        background-color: blue;
+        color: black;
+        width: 210px;
+        height: 40%;
+        border-radius: 5px;
+        border: 1.2px solid white;*/
+        font-family: "Times New Roman", Times, serif;
+        font-size: 14px;
+      }
+      .msgBorder:hover{
+        border: 1px solid white;
+      }
+      .history {
+        opacity: 1;
+        position: absolute;
+        top: 15%;
+        left: 1.5%;
+        background-color: white;
+        color: black;
+        width: 200px;
+        height: 62.5%;
+        border-radius: 5px 5px 0px 0px;
+        border: 2px solid blue;*/
+        font-family: "Times New Roman", Times, serif;
+        font-size: 14px;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+      #msgType {
+        opacity: 1;
+        position: absolute;
+        top: 77%;
+        left: 2.5%;;
+        background-color: aqua;
+        color: black;
+        width: 95%;
+        height: 36px;
+        border-radius: 5px;
+        border: 2px solid white;*/
+        font-family: "Times New Roman", Times, serif;
+        font-size: 80%;
+        overflow-y: hidden;
+        overflow-x: hidden;
+      }
+      .closeMsg {
+        border: none;
+        opacity: 1;
+        border-radius: 100px;
+        position: absolute;
+        background-color: white;
+        color: blue;
+        height: 10%;
+        width: 10%;
+        left: 89%;
+        top: 1%;
+
+        z-index: 100;
+      }
+      .closeMsg:hover {
+        border: 1px solid red;
+      }
+      #leShopDoor {
+        position: absolute;
+        top: 33%;
+        left:86%;
+        height: 20%;
+        width: 12%;
+        color: white;
+        font-family:
+      }
+      #leShopCataButton {
+        height: 50px;
+        width: 50px;
+        position: absolute;
+        right: 0%;
+        top: 0%;
+        border: 3.2px solid white;
+        border-radius: 10%;
+        background-image: linear-gradient(#3BA8ED, #47619A);
+        font-family: 'Concert One', cursive;
+        color: white;
+        font-size: 15px;
+        text-align: center;
+        line-height: 40px;
+      }
+      #leShopCataButton:hover {
+        border: 3px solid white;
+      }
+      #leShopCatalog {
+        height: 88%;
+        width: 45%;
+        left: 27.5%;
+        top: 6%;
+        position: absolute;
+        background-image: url('leShopCatalog.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        border:2px solid gray;
+        border-radius: 4px;
+      }
+      #leShopCatalog2 {
+        height: 88%;
+        width: 100%;
+        left: 1%;
+        top: 6%;
+        position: absolute;
+        background-image: url('leshopcatalog2.png');
+        background-size: 98%;
+        background-repeat: no-repeat;
+        border:2px solid gray;
+        border-radius: 4px;
+      }
+      #leShopCataNext{
+        height: 15%;
+        width: 20%;
+        border: 0px solid red;
+        position: absolute;
+        left: 80%;
+        top: 85%;
+      }
+      #leShopCataNext:hover {
+        border: 1px solid red;
+      }
+      #leShopCataClose {
+        height: 4.8%;
+        width: 3%;
+        background-color: white;
+        border: 1px solid red;
+        position: absolute;
+        left: 96%;
+        top: 1%;
+        border-radius: 100%;
+        opacity: 0.9;
+      }
+      #leShopCataClose:hover {
+        border: 1px solid white;
+      }
+      #leShopExit {
+        position: absolute;
+        top: 33%;
+        left:42%;
+        height: 20%;
+        width: 12%;
+      }
+      #leShopDoor:hover {
+        border: 0px solid red;
+      }
+      #leShopExit:hover {
+        border: 0px solid red;
+      }
+      #ninja {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        float: left;
+        background-image: url(ninja.png);
+      }
+      #ninjaPre {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        position: absolute;
+        background-image: url(ninja.png);
+      }
+      #wizard {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        float: left;
+        background-image: url(wizard.png);
+      }
+      #wizardPre {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        position: absolute;
+        background-image: url(wizard.png);
+      }
+      #ninja:hover {
+        border: 0px solid red;
+      }
+      #wizard:hover {
+        border: 0px solid red;
+      }
+      #vampireBlack {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        float: left;
+        background-image: url(vampireBlack.png);
+      }
+      #vampireBlackPre {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        position: absolute;
+        background-image: url(vampireBlack.png);
+      }
+      #vampireBlack:hover {
+        border: 0px solid red;
+      }
+      #tuxedoMask {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        float: left;
+        background-image: url(tuxedoMask.png);
+      }
+      #tuxedoMaskPre {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        position: absolute;
+        background-image: url(tuxedoMask.png);
+      }
+      #tuxedoMask:hover {
+        border: 0px solid red;
+      }
+      #boyTopRedOrange {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        float: left;
+        background-image: url(boyTopRedOrange.png);
+      }
+      #boyTopRedOrangePre {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        position: absolute;
+        background-image: url(boyTopRedOrange.png);
+        z-index: 3;
+      }
+      #boyTopRedOrange:hover {
+        border: 0px solid red;
+      }
+      #boyBotRedSnake {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        float: left;
+        background-image: url(boyBotRedSnake.png);
+      }
+      #boyBotRedSnakePre {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        position: absolute;
+        background-image: url(boyBotRedSnake.png);
+        z-index: 2;
+      }
+      #boyBotRedSnake:hover {
+        border: 0px solid red;
+      }
+      #boyHairShaggyBlonde {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        float: left;
+        background-image: url(boyHairShaggyBlonde.png);
+      }
+      #boyHairShaggyBlondePre {
+        left: 0px;
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        position: absolute;
+        background-image: url(boyHairShaggyBlonde.png);
+      }
+      #boyHairShaggyBlonde:hover {
+        border: 0px solid red;
+      }
+      #boyHairSantaBlonde {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        float: left;
+        background-image: url(boyHairSantaBlonde.png);
+      }
+      #boyHairSantaBlondePre {
+        left: 0px;
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        position: absolute;
+        background-image: url(boyHairSantaBlonde.png);
+      }
+      #boyHairSantaBlonde:hover {
+        border: 0px solid red;
+      }
+      #puppyBoard {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        float: left;
+        background-image: url(puppyBoard.png);
+      }
+      #puppyBoardPre {
+        left: 0px;
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        position: absolute;
+        background-image: url(puppyBoard.png);
+        z-index: 1;
+      }
+      #puppyBoard:hover {
+        border: 0px solid red;
+      }
+      #eggBoard {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        float: left;
+        background-image: url(eggBoard.png);
+      }
+      #eggBoardPre {
+        left: 0px;
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        position: absolute;
+        background-image: url(eggBoard.png);
+        z-index: 1;
+      }
+      #eggBoard:hover {
+        border: 0px solid red;
+      }
+      #batwingBoard {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        float: left;
+        background-image: url(batwingBoard.png);
+      }
+      #batwingBoardPre {
+        left: 0px;
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        position: absolute;
+        background-image: url(batwingBoard.png);
+        z-index: 1;
+      }
+      #batwingBoard:hover {
+        border: 0px solid red;
+      }
+      #boyTopStylinVest {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        float: left;
+        background-image: url(boyTopStylinVest.png);
+      }
+      #boyTopStylinVest:hover{
+        border: 0px solid red;
+      }
+      #boyTopStylinVestPre {
+        height: 200px;
+        width: 150px;
+        position: absolute;
+        background-repeat: no-repeat;
+        background-image: url(boyTopStylinVest.png);
+      }
+      #boyHairPaperBag {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        float: left;
+        background-image: url(boyHairPaperBag.png);
+      }
+      #boyHairPaperBag:hover{
+        border: 0px solid red;
+      }
+      #boyHairPaperBagPre {
+        height: 200px;
+        width: 150px;
+        position: absolute;
+        background-repeat: no-repeat;
+        background-image: url(boyHairPaperBag.png);
+      }
+      #boyAccCodyGloves {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        float: left;
+        background-image: url(boyAccCodyGloves.png);
+      }
+      #boyAccCodyGloves:hover{
+        border: 0px solid red;
+      }
+      #boyAccCodyGlovesPre {
+        height: 200px;
+        width: 150px;
+        background-repeat: no-repeat;
+        position: absolute;
+        background-image: url(boyAccCodyGloves.png);
+        z-index: 2;
+      }
+
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+
+
+      var speed = 500;
+      var stars = 0;
+      var ecoins = 0;
+      var level = 4;
+      jQuery(document).ready(function(){
+        document.getElementById("screen").disabled = true
+
+        var location = "downtown";
+        var downtownScrollR = true;
+        var downtownScrollL = false;
+        var hairs = "<div id='boyHairShaggyBlonde'></div><div id='boyHairPaperBag'></div><div id='boyHairSantaBlonde'></div>"
+        var clothes = "<div id='ninja'></div><div id='wizard'></div><div id='vampireBlack'></div><div id='tuxedoMask'></div><div id='boyTopRedOrange'></div><div id='boyTopStylinVest'></div><div id='boyBotRedSnake'></div>"
+        var boards = "<div id='puppyBoard'></div><div id='eggBoard'></div><div id='batwingBoard'></div>"
+        var accessories = "<div id='boyAccCodyGloves'></div"
+        var accClick = 0
+        var preview = "<div id='boyBotRedSnakePre'></div><div id='boyTopRedOrangePre'></div><div id='boyHairShaggyBlondePre'></div><div id='puppyBoardPre'></div>";
+        var uMsg = document.getElementById("chat").value;
+        var currentChat = document.getElementById("chat").value;
+        var actionsOpen = false;
+        var faceLeft = true;
+        var inventOpen = false;
+        var idfoneOpen = false;
+        var historyOpen = false;
+        var hair = "boyHairShaggyBlonde";
+        var top = "boyTopRedOrange";
+        var bot = "boyBotRedSnake";
+        var shoes = "";
+        var board = "puppyBoard";
+        var costume = "";
+        var acc = "";
+        var hairPre = "boyHairShaggyBlonde";
+        var topPre = "boyTopRedOrange";
+        var botPre = "boyBotRedSnake";
+        var costumePre = "";
+        var boardPre = "puppyBoard";
+        var accPre = "";
+        var userX = $('.user').css('right');
+        var moving = true;
+
+        $("body").keyup(function(event) {
+          if (event.keyCode === 13) {
+              document.getElementById("chat").focus();
+              document.getElementById("chat").value = "";
+          }
+      });
+
+
+        jQuery('#screen').click(function(e){
+
+          document.getElementById("chat").value = "Click Here or Press ENTER to Chat";
+
+          if($(document.getElementById("chat")).is(':focus')) {
+            document.getElementById("chat").value = "";
+          }
+
+          var clickLeShopDoor = $("#leShopDoor").css('border');
+          if (clickLeShopDoor == "0px solid rgb(255, 0, 0)") {
+            setTimeout(function(){
+              $('#screen').css('background-image','url("leshop.png")');
+              $('#screen').css({'background-size':'100%'});
+              $('.user').animate({'top':'50%', 'right': '45%'}, 1);
+              $('#clickUser').animate({'top':'61.5%', 'right': '-36%'}, 1);
+            }, 700)
+            $('.blank3').empty();
+            $('.blank3').append("<div id='leShopExit'></div><button id='leShopCataButton'>SHOP</button>");
+            location = "leshop";
+          }
+
+          var openLeShopCatalog = $("#leShopCataButton").css('border');
+          if (openLeShopCatalog == "3px solid rgb(255, 255, 255)") {
+            $('.blank1').append("<div class='block'></div><div id='leShopCatalog'><div id='leShopCataNext'></div></div><button id='leShopCataClose'></button>");
+            moving = false;
+          }
+
+          var leShopCataClose = $("#leShopCataClose").css('border');
+          if (leShopCataClose == "1px solid rgb(255, 255, 255)") {
+            $('.blank1').empty();
+            setTimeout(function(){ moving = true; }, 200)
+          }
+
+          var leShopCataNext = $("#leShopCataNext").css('border');
+          if (leShopCataNext == "1px solid rgb(255, 0, 0)") {
+            $('.blank1').empty();
+            $('.blank1').append("<div class='block'></div><div id='leShopCatalog2'><div id='leShopCataNext'></div></div><button id='leShopCataClose'></button>");
+            $('#anothertext').html('fuck');
+          }
+
+          var clickLeShopExit = $("#leShopExit").css('border');
+          if (clickLeShopExit == "0px solid rgb(255, 0, 0)") {
+            setTimeout(function(){
+              $('#screen').css('background-image','url("downtownnight.png")');
+              $('#screen').css({'background-size':'127%'});
+              $('.user').animate({'top':'50%', 'right': '45%'}, 1);
+              $('#clickUser').animate({'top':'61.5%', 'right': '-36%'}, 1);
+            }, 700)
+            $('.blank3').empty();
+            $('.blank3').append("<div id='leShopDoor'></div>");
+            location = "downtown";
+          }
+
+          var clickUser = $("#clickUser").css('border');
+          if (clickUser == "0px solid rgb(255, 0, 0)") {
+            $('.blank2').append("<div class='block'></div>")
+            $('.blank2').append("<div id='idfoneBorder'><div id='idfoneContainer'><div id='idfone'><img id='idfoneStar' src='idfoneStar.png'></img><h1 id='userTitle'>FANTAGE NOVICE</h1><h1 class='userIdfone'>sp00py_gh0st</h1><div id='idfoneAvatar'><div id='idfoneBody'></div><div id='boardPre'</div><div id='hairPre'></div><div id='topPre'></div><div id='botPre'></div><div id='costumePre'></div><div id='accPre'></div></div></div><div id='infoBar'><div id='level'>Level:<p id='levelVal'></p></div><img id='starsEcoins' src='starsEcoins.png'></img><p id='starsLabel'>Balance: </p><p id='ecoinsLabel'>Balance: </p></div></div></div><button id='closeIdfone'>X</button></div></div>")
+            $('#starsLabel').append(stars);
+            $('#ecoinsLabel').append(ecoins);
+            $('#levelVal').append(level);
+            idfoneOpen = true;
+          }
+
+          var msgBorderClick = $(".msgBorder").css('border');
+
+          var closeIdfone = $("#closeIdfone").css('border');
+          if (closeIdfone == "0px solid rgb(255, 0, 0)") {
+            $('.blank2').empty();
+            idfoneOpen = false;
+          }
+
+          var closeBorder = $(".closeMsg").css('border');
+          if (closeBorder == "1px solid rgb(255, 0, 0)") {
+            $('.msgBorder').css('opacity', '0')
+
+            var el = document.getElementById('msgType');
+            el.remove();
+            historyOpen = false;
+          }
+          var closeInventButton = $("#closeInvent").css('border');
+          if (closeInventButton == "1px solid rgb(255, 0, 0)") {
+            $('#costume').css({'background-image':'url('+ costume +'.png)'})
+            $('#hair').css({'background-image':'url('+ hair +'.png)'})
+            $('#top').css({'background-image':'url('+ top +'.png)'})
+            $('#bot').css({'background-image':'url('+ bot +'.png)'})
+            $('#board').css({'background-image':'url('+ board +'.png)'})
+            $('.blank1').empty();
+            inventOpen = false;
+          }
+
+          var clothesTabButton = $("#clothesTab").css('border');
+          if (clothesTabButton == "1px solid rgb(255, 0, 0)") {
+            $('.inventBg2').empty();
+            $('.inventBg2').append('<div class="clothesContainer"></div>');
+            $(".clothesContainer").append(clothes);
+            $('#hairPre').css({'background-image':'url('+hairPre+'.png)'});
+            $('#topPre').css({'background-image':'url('+topPre+'.png)'});
+            $('#botPre').css({'background-image':'url('+botPre+'.png)'});
+            $('#costumePre').css({'background-image':'url('+costumePre+'.png)'});
+            $('#boardPre').css({'background-image':'url('+boardPre+'.png)'});
+            $('#accPre').css({'background-image':'url('+accPre+'.png)'});
+            $(".inventBg2").append("<div class='avatarContainer'><div class='avatarPreview'><div id='hairPre'></div><div id='topPre'></div><div id='botPre'></div><div id='costumePre'></div><div id='boardPre'></div><div id='accPre'></div></div></div>");
+          }
+
+          var hairTabButton = $("#hairTab").css('border');
+          if (hairTabButton == "1px solid rgb(255, 0, 0)") {
+            $('.inventBg2').empty();
+            $('.inventBg2').append('<div class="hairContainer"></div>');
+            $('.hairContainer').append(hairs);
+            $('#hairPre').css({'background-image':'url('+hairPre+'.png)'});
+            $('#topPre').css({'background-image':'url('+topPre+'.png)'});
+            $('#botPre').css({'background-image':'url('+botPre+'.png)'});
+            $('#costumePre').css({'background-image':'url('+costumePre+'.png)'});
+            $('#boardPre').css({'background-image':'url('+boardPre+'.png)'});
+            $('#accPre').css({'background-image':'url('+accPre+'.png)'});
+            $(".inventBg2").append("<div class='avatarContainer'><div class='avatarPreview'><div id='hairPre'></div><div id='topPre'></div><div id='botPre'></div><div id='costumePre'></div><div id='boardPre'></div><div id='accPre'></div></div></div>");
+          }
+
+          var boardTabButton = $("#boardTab").css('border');
+          if (boardTabButton == "1px solid rgb(255, 0, 0)") {
+            $('.inventBg2').empty();
+            $('.inventBg2').append('<div class="boardContainer"></div>');
+            $('.boardContainer').append(boards);
+            $('#hairPre').css({'background-image':'url('+hairPre+'.png)'});
+            $('#topPre').css({'background-image':'url('+topPre+'.png)'});
+            $('#botPre').css({'background-image':'url('+botPre+'.png)'});
+            $('#costumePre').css({'background-image':'url('+costumePre+'.png)'});
+            $('#boardPre').css({'background-image':'url('+boardPre+'.png)'});
+            $('#accPre').css({'background-image':'url('+accPre+'.png)'});
+            $(".inventBg2").append("<div class='avatarContainer'><div class='avatarPreview'><div id='hairPre'></div><div id='topPre'></div><div id='botPre'></div><div id='costumePre'></div><div id='boardPre'></div><div id='accPre'></div></div></div>");
+          }
+
+          var accessoryTabButton = $("#accessoryTab").css('border');
+          if (accessoryTabButton == "1px solid rgb(255, 0, 0)") {
+            $('.inventBg2').empty();
+            $('.inventBg2').append('<div class="accessoryContainer"></div>');
+            $('.accessoryContainer').append(accessories);
+            $('#hairPre').css({'background-image':'url('+hairPre+'.png)'});
+            $('#topPre').css({'background-image':'url('+topPre+'.png)'});
+            $('#botPre').css({'background-image':'url('+botPre+'.png)'});
+            $('#costumePre').css({'background-image':'url('+costumePre+'.png)'});
+            $('#boardPre').css({'background-image':'url('+boardPre+'.png)'});
+            $('#accPre').css({'background-image':'url('+accPre+'.png)'});
+            $(".inventBg2").append("<div class='avatarContainer'><div class='avatarPreview'><div id='hairPre'></div><div id='topPre'></div><div id='botPre'></div><div id='costumePre'></div><div id='boardPre'></div><div id='accPre'></div></div></div>");
+          }
+
+          var ninja = $("#ninja").css('border');
+          if (ninja == "0px solid rgb(255, 0, 0)") {
+            $('#costume').css({'background-image':'url(ninja.png)'})
+            costumePre = "ninja";
+            hairPre = "";
+            topPre = "";
+            botPre = "";
+            costume = "ninja";
+            hair = "";
+            top = "";
+            bot = "";
+          }
+          var wizard = $("#wizard").css('border');
+          if (wizard == "0px solid rgb(255, 0, 0)") {
+            $('#costume').css({'background-image':'url(wizard.png)'})
+            costumePre = "wizard";
+            hairPre = "";
+            topPre = "";
+            botPre = "";
+            costume = "wizard";
+            hair = "";
+            top = "";
+            bot = "";
+          }
+          var vampireBlack = $("#vampireBlack").css('border');
+          if (vampireBlack == "0px solid rgb(255, 0, 0)") {
+            $('#costume').css({'background-image':'url(vampireBlack.png)'})
+            costumePre = "vampireBlack";
+            hairPre = "";
+            topPre = "";
+            botPre = "";
+            costume = "vampireBlack";
+            hair = "";
+            top = "";
+            bot = "";
+          }
+          var tuxedoMask = $("#tuxedoMask").css('border');
+          if (tuxedoMask == "0px solid rgb(255, 0, 0)") {
+            $('#costume').css({'background-image':'url(tuxedoMask.png)'})
+            costumePre = "tuxedoMask";
+            hairPre = "";
+            topPre = "";
+            botPre = "";
+            costume = "tuxedoMask";
+            hair = "";
+            top = "";
+            bot = "";
+          }
+          var boyHairShaggyBlonde = $("#boyHairShaggyBlonde").css('border');
+          if (boyHairShaggyBlonde == "0px solid rgb(255, 0, 0)") {
+            $('#top').css({'background-image':'url(boyHairShaggyBlonde.png)'})
+            costumePre = "";
+            hairPre = "boyHairShaggyBlonde";
+            costume = "";
+            hair = "boyHairShaggyBlonde";
+          }
+          var boyHairPaperBag = $("#boyHairPaperBag").css('border');
+          if (boyHairPaperBag == "0px solid rgb(255, 0, 0)") {
+            $('#top').css({'background-image':'url(boyHairPaperBag.png)'})
+            costumePre = "";
+            hairPre = "boyHairPaperBag";
+            costume = "";
+            hair = "boyHairPaperBag";
+          }
+          var boyHairSantaBlonde = $("#boyHairSantaBlonde").css('border');
+          if (boyHairSantaBlonde == "0px solid rgb(255, 0, 0)") {
+            $('#top').css({'background-image':'url(boyHairSantaBlonde.png)'})
+            costumePre = "";
+            hairPre = "boyHairSantaBlonde";
+            costume = "";
+            hair = "boyHairSantaBlonde";
+          }
+          var boyTopRedOrange = $("#boyTopRedOrange").css('border');
+          if (boyTopRedOrange == "0px solid rgb(255, 0, 0)") {
+            $('#hair').css({'background-image':'url(boyTopRedOrange.png)'})
+            costumePre = "";
+            topPre = "boyTopRedOrange";
+            costume = "";
+            top = "boyTopRedOrange";
+          }
+
+          var boyTopStylinVest = $("#boyTopStylinVest").css('border');
+          if (boyTopStylinVest == "0px solid rgb(255, 0, 0)") {
+            $('#top').css({'background-image':'url(boyTopStylinVest.png)'})
+            costumePre = "";
+            topPre = "boyTopStylinVest";
+            costume = "";
+            top = "boyTopStylinVest";
+          }
+
+          var boyBotRedSnake = $("#boyBotRedSnake").css('border');
+          if (boyBotRedSnake == "0px solid rgb(255, 0, 0)") {
+            $('#bot').css({'background-image':'url(boyBotRedSnake.png)'})
+            costumePre = "";
+            botPre = "boyBotRedSnake";
+            costume = "";
+            bot = "boyBotRedSnake";
+          }
+          var boyAccCodyGloves = $("#boyAccCodyGloves").css('border');
+          if (boyAccCodyGloves == "0px solid rgb(255, 0, 0)" && accClick % 2 === 0) {
+            accClick += 1;
+            $('#acc').css({'background-image':'url(boyAccCodyGloves.png)'})
+            acc = "boyAccCodyGloves";
+            accPre = "boyAccCodyGloves";
+          }
+          else if (boyAccCodyGloves == "0px solid rgb(255, 0, 0)") {
+            $('#acc').css({'background-image':'url(1)'})
+            acc = "";
+            accPre = "";
+            accClick -= 1;
+          }
+
+          var puppyBoard = $("#puppyBoard").css('border');
+          if (puppyBoard == "0px solid rgb(255, 0, 0)") {
+            $('#board').css({'background-image':'url(puppyBoard.png)'})
+            boardPre = "puppyBoard";
+            board = "puppyBoard";
+          }
+          var eggBoard = $("#eggBoard").css('border');
+          if (eggBoard == "0px solid rgb(255, 0, 0)") {
+            $('#board').css({'background-image':'url(eggBoard.png)'})
+            boardPre = "eggBoard";
+            board = "eggBoard";
+          }
+          var batwingBoard = $("#batwingBoard").css('border');
+          if (batwingBoard == "0px solid rgb(255, 0, 0)") {
+            $('#board').css({'background-image':'url(batwingBoard.png)'})
+            boardPre = "batwingBoard";
+            board = "batwingBoard";
+          }
+          $('#hairPre').css({'background-image':'url('+hairPre+'.png)'});
+          $('#topPre').css({'background-image':'url('+topPre+'.png)'});
+          $('#botPre').css({'background-image':'url('+botPre+'.png)'});
+          $('#costumePre').css({'background-image':'url('+costumePre+'.png)'});
+          $('#boardPre').css({'background-image':'url('+boardPre+'.png)'});
+          $('#accPre').css({'background-image':'url('+accPre+'.png)'});
+
+
+          var x = $('.user').position();
+          var mX = $('.message').position();
+
+          var moveX = (1440 - e.pageX) - (900 - x.left) - 145;
+          var moveY = x.top - e.pageY + 172;
+
+          var msgX = (1440 - e.pageX) - (900 - mX.left);
+          var msgY = mX.top - e.pageY;
+
+          jQuery('.message').css({'left':'23%'});
+          /*if (x.top < 390 && x.left < 360){
+            jQuery('p').html('cafe');
+            jQuery('#screen').css({'background-image:': 'url(starcafe.png)'});
+            jQuery('h3').html('cafe');
+            setTimeout(function() {
+              window.location.href = "starcafe.html";
+            }, 600);
+          }*/
+
+          if (x.left > e.pageX - 400 && !(closeBorder == "1px solid rgb(255, 0, 0)")) {
+            //jQuery('#userN').css('background-image', 'url(user.png)');
+            jQuery('#userN').css('transform', 'scaleX(1)');
+            jQuery('#costume').css('transform', 'scaleX(1)');
+            jQuery('#hair').css('transform', 'scaleX(1)');
+            jQuery('#top').css('transform', 'scaleX(1)');
+            jQuery('#bot').css('transform', 'scaleX(1)');
+            jQuery('#board').css('transform', 'scaleX(1)');
+            jQuery('#acc').css('transform', 'scaleX(1)');
+            faceLeft = true;
+          }
+          else if (!(closeBorder == "1px solid rgb(255, 0, 0)")){
+            //jQuery('#userN').css('background-image', 'url(userR.png)');
+            jQuery('#userN').css('transform', 'scaleX(-1)');
+            jQuery('#costume').css('transform', 'scaleX(-1)');
+            jQuery('#hair').css('transform', 'scaleX(-1)');
+            jQuery('#top').css('transform', 'scaleX(-1)');
+            jQuery('#bot').css('transform', 'scaleX(-1)');
+            jQuery('#board').css('transform', 'scaleX(-1)');
+            jQuery('#acc').css('transform', 'scaleX(-1)');
+            faceLeft = false;
+          }
+
+          //ORIGINAL
+          // closeHistory, chatBar
+          //if (!((msgBorderClick == '1px solid rgb(255, 255, 255)' && historyOpen == true) || closeBorder == '1px solid rgb(255, 0, 0)' || ($(document.getElementById("chat")).is(':focus')) || (closeIdfone == "0px solid rgb(255, 0, 0)") || (closeInventButton == "1px solid rgb(255, 0, 0)") || (inventOpen == true)  )){
+          //  console.log(msgBorderClick);
+          /*}
+          else if ((e.pageX > 560 && e.pageY > 540 && e.pageX < 850 && e.pageY < 575) || (e.pageX > 865 && e.pageY >540 && e.pageX < 943 && e.pageY < 556)
+        || ( e.pageX > 1000 && e.pageY > 526 && e.pageX < 1032 && e.pageY < 558) || (e.pageX > 1046 && e.pageY > 526 && e.pageX < 1081 && e.pageY < 558)){
+*/
+        //}
+          if (moving === true & e.pageY < 625 && e.pageX < 1066 && e.pageX > 375 && e.pageY > 337    && (!((msgBorderClick == '1px solid rgb(255, 255, 255)' && historyOpen == true) || closeBorder == '1px solid rgb(255, 0, 0)' || ($(document.getElementById("chat")).is(':focus')) || (closeIdfone == "0px solid rgb(255, 0, 0)") || (closeInventButton == "1px solid rgb(255, 0, 0)") || (inventOpen == true) || (idfoneOpen == true) ))) {
+            $('.user').stop();
+            $('#clickUser').stop();
+            $('.user').animate({right: '+=' +moveX, top: '+=' +(-moveY - 100)}, speed);
+            $('#clickUser').animate({right: '+=' +moveX, top: '+=' +(-moveY - 100)}, speed);
+            $('h3').html('normal');
+            //$('.message').animate({right: '+=' +msgX, top: '+=' +(-msgY - 150)}, speed);
+            currentChat = document.getElementById("chat").value
+
+          }
+          if (faceLeft == false) {
+            jQuery('.message').css('transform', 'scaleX(-1)');
+            jQuery('#username').css('transform', 'scaleX(-1)');
+          }
+          else if (faceLeft == true){
+            jQuery('.message').css('transform', 'scaleX(1)');
+            jQuery('#username').css('transform', 'scaleX(1)');
+          }
+          //BOUNDERIES
+          /*else if (actionsOpen = true) {
+            if (e.pageX > 1017 && e.pageX < 1117) {
+
+            }*/
+          /*if (e.pageX < 374){
+              $('h3').html('bottom');
+              $('.user').animate({right: '+=' +moveX, top: '+=' +(-moveY - 200)}, speed);
+              $('.message').animate({right: '+=' +moveX, top: '+=' +(-moveY)}, speed);
+            }*/
+
+          /*else if (e.pageX > 1170 && e.pageY > 575 && e.pageY > 305){
+            $('.user').animate({'right': '-20px', 'top': '355px'}, speed);
+            //jQuery('p').html('botRight');
+          }
+          else if (e.pageX < 320 && e.pageY > 575 && e.pageY > 305){
+            $('.user').animate({'right': '820px', 'top': '355px'}, speed);
+            //jQuery('p').html('botLeft');
+          }*/
+          if (moving === true & e.pageX <= 375 && e.pageY > 335    && (!((msgBorderClick == '1px solid rgb(255, 255, 255)' && historyOpen == true) || closeBorder == '1px solid rgb(255, 0, 0)' || ($(document.getElementById("chat")).is(':focus')) || (closeIdfone == "0px solid rgb(255, 0, 0)") || (closeInventButton == "1px solid rgb(255, 0, 0)") || (inventOpen == true) || (idfoneOpen == true)  ))){
+            $('.user').stop();
+            $('#clickUser').stop();
+            $('#clickUser').animate({top: '+=' +(-moveY - 100), 'right': '25px'}, speed);
+            $('.user').animate({top: '+=' +(-moveY - 100), 'right': '670px'}, speed, function(){
+              if (location == "downtown" && downtownScrollL == true) {
+                var i = 100;
+                var n = 0;
+                var intervalID = setInterval(function () {
+
+                  $('.user').stop();
+                  $('#clickUser').stop();
+                  $('#screen').css({'background-position': i +'%'});
+                  $('.user').css({'right': 470+(2.1*i)+'px'});
+                  $('#clickUser').css({'right': -180+((2.1*i)) +'px'});
+                  i--;
+
+                   if (++n === 100) {
+                       window.clearInterval(intervalID);
+                       $('.blank3').empty();
+                   }
+                }, 8);
+
+                downtownScrollR = true;
+                downtownScrollL = false;
+              }
+
+            });
+
+            jQuery('h3').html('left');
+          }
+
+          else if (moving === true & e.pageX >= 1066 && e.pageY > 335    && (!((msgBorderClick == '1px solid rgb(255, 255, 255)' && historyOpen == true) || closeBorder == '1px solid rgb(255, 0, 0)' || ($(document.getElementById("chat")).is(':focus')) || (closeIdfone == "0px solid rgb(255, 0, 0)") || (closeInventButton == "1px solid rgb(255, 0, 0)") || (inventOpen == true) || (idfoneOpen == true)  ))){
+            $('#clickUser').animate({top: '+=' +(-moveY - 100), 'right': '-670px'}, speed);
+            $('.user').animate({top: '+=' +(-moveY - 100), 'right': '-20px'}, speed, function(){
+              if (location == "downtown" && downtownScrollR == true) {
+                var i = 0;
+                var n = 0;
+                var intervalID = setInterval(function () {
+
+                  $('.user').stop();
+                  $('#clickUser').stop();
+                  $('#screen').css({'background-position': i +'%'});
+                  $('.user').css({'right': i*.28 +'%'});
+                  $('#clickUser').css({'right': (i - 290)*.28 +'%'});
+                  i++;
+
+                   if (++n === 100) {
+                       window.clearInterval(intervalID);
+                       $('.blank3').append("<div id='leShopDoor'></div>")
+                   }
+                }, 8);
+                downtownScrollR = false;
+                downtownScrollL = true;
+              }
+
+            });
+
+            //$('.user').animate({'right': '100px'}, 1500);
+            jQuery('h3').html('right');
+
+          }
+          else if (moving === true & e.pageY < 315 && e.pageX > 339 && e.pageX < 1170  && !(openLeShopCatalog == "3px solid rgb(255, 255, 255)")  && (!((msgBorderClick == '1px solid rgb(255, 255, 255)' && historyOpen == true) || closeBorder == '1px solid rgb(255, 0, 0)' || ($(document.getElementById("chat")).is(':focus')) || (closeIdfone == "0px solid rgb(255, 0, 0)") || (closeInventButton == "1px solid rgb(255, 0, 0)") || (inventOpen == true) || (idfoneOpen == true)  ))){
+            $('.user').stop();
+            $('#clickUser').stop();
+            $('#clickUser').animate({right: '+=' +moveX,'top':'135px'}, speed);
+            $('.user').animate({right: '+=' +moveX, 'top': '75px'}, speed);
+            jQuery('h3').html('top');
+          }
+          else if (moving === true & e.pageY < 315 && e.pageX < 339    && (!((msgBorderClick == '1px solid rgb(255, 255, 255)' && historyOpen == true) || closeBorder == '1px solid rgb(255, 0, 0)' || ($(document.getElementById("chat")).is(':focus')) || (closeIdfone == "0px solid rgb(255, 0, 0)") || (closeInventButton == "1px solid rgb(255, 0, 0)") || (inventOpen == true) || (idfoneOpen == true)  ))){
+            $('.user').animate({'right': '670px', 'top': '75px'}, speed);
+            $('#clickUser').animate({'right': '20px', 'top': '135px'}, speed);
+            jQuery('h3').html('topLeft');
+          }/*
+          else if (e.pageX < 330 && e.pageY >1170){
+            $('.user').animate({'right': '-20px', 'top': '90px'}, speed);
+            //jQuery('p').html('topRight');
+          }*/
+        });
+
+/*
+position: relative;
+float: left;
+top: 360px;
+height: 100px;
+width: 50px;*/
+
+
+
+
+        jQuery('.actions').click(function(){
+          if (actionsOpen == false) {
+            $(".wave").css({"background-color": "blue", "height": "150px", "width": "100px", "opacity": "0.5", 'color': 'white'});
+            jQuery('.wave').html('jump');
+            actionsOpen = true;
+          }
+          else {
+            $(".wave").css({"background-color": "", "height": "", "width": "", "opacity": "", 'color': ''});
+            jQuery('.wave').html('');
+            actionsOpen = false;
+          }
+
+        jQuery('.wave').click(function(){
+
+          if (faceLeft == true) {
+            jQuery('.user').css('background-image', 'url(userW1.png)');
+          }
+          else {
+            jQuery('.user').css('background-image', 'url(userW1R.png)');
+          }
+          jQuery('.timer').animate({'left':'200'}, 100);
+          //jQuery('#userN').css('background-image', 'url(user.png)');
+          $(".wave").css({"background-color": "", "height": "", "width": "", "opacity": "", 'color': ''});
+          jQuery('.actions').html('');
+          //actionsOpen = false;
+
+        })
+
+        });
+
+        jQuery('.inventory').click(function(){
+
+          $(".blank1").append("<div class='block'></div>");
+          $(".blank1").append("<div class='inventOpen'></div>");
+          $(".inventOpen").append("<button id='closeInvent'></button>");
+          $(".inventOpen").append("<div class='inventBg'></div>");
+          $(".inventBg").append("<button id='hairTab' class='inventTabs'>Hair</button><button id='clothesTab' class='inventTabs'>Clothes</button><button id='boardTab' class='inventTabs'>Board</button><button id='accessoryTab' class='inventTabs'>Accessory</button>");
+          $(".inventBg").append('<div class="inventBg2"></div>');
+          $(".inventBg2").append('<div class="clothesContainer"></div>');
+          $(".inventBg2").append("<div class='avatarContainer'><div class='avatarPreview'><div id='hairPre'></div><div id='topPre'></div><div id='botPre'></div><div id='costumePre'></div><div id='boardPre'></div><div id='accPre'></div></div></div>");
+          $('#hairPre').css({'background-image':'url('+hairPre+'.png)'});
+          $('#topPre').css({'background-image':'url('+topPre+'.png)'});
+          $('#botPre').css({'background-image':'url('+botPre+'.png)'});
+          $('#costumePre').css({'background-image':'url('+costumePre+'.png)'});
+
+          $(".clothesContainer").append(clothes);
+          inventOpen = true;
+        });
+
+
+        /*window.setInterval(function() {
+          var elem = document.getElementByClassName('history');
+          elem.scrollTop = elem.scrollHeight;
+        }, 5000);*/
+        document.onkeydown = checkKey;
+
+        function checkKey(e) {
+          var x = $('.user').position();
+          var mX = $('.message').position();
+
+          e = e || window.event;
+
+          if (e.keyCode == '38') {
+            $('.user').stop();
+            $('#clickUser').stop();
+            $('.user').animate({top: '+=' +(-100)}, speed);
+            $('#clickUser').animate({top: '+=' +(-100)}, speed);
+          }
+          else if (e.keyCode == '40') {
+            $('.user').stop();
+            $('#clickUser').stop();
+            $('.user').animate({top: '+=' +(100)}, speed);
+            $('#clickUser').animate({top: '+=' +(100)}, speed);
+          }
+          else if (e.keyCode == '37') {
+            var userX = $('.user').css('right') + 100;
+            if (userX < 605+'px') {
+              $('.user').stop();
+              $('#clickUser').stop();
+              $('.user').animate({right: '+=' +(100)}, speed);
+              $('#clickUser').animate({right: '+=' +(100)}, speed);
+              jQuery('h2').html(userX);
+              jQuery('#userN').css('transform', 'scaleX(1)');
+              jQuery('#costume').css('transform', 'scaleX(1)');
+              jQuery('#hair').css('transform', 'scaleX(1)');
+              jQuery('#top').css('transform', 'scaleX(1)');
+              jQuery('#bot').css('transform', 'scaleX(1)');
+              jQuery('#board').css('transform', 'scaleX(1)');
+              jQuery('#acc').css('transform', 'scaleX(1)');
+              faceLeft = true;
+              jQuery('.message').css('transform', 'scaleX(1)');
+              jQuery('#username').css('transform', 'scaleX(1)');
+            }
+            if (userX > 667 + 'px'){
+              $('.user').animate({'right': userX - 100}, 1);
+            }
+
+          }
+          else if (e.keyCode == '39') {
+            $('.user').stop();
+            $('#clickUser').stop();
+            $('.user').animate({right: '+=' +(-100)}, speed);
+            $('#clickUser').animate({right: '+=' +(-100)}, speed);
+            jQuery('h2').html(userX);
+            jQuery('#userN').css('transform', 'scaleX(-1)');
+            jQuery('#costume').css('transform', 'scaleX(-1)');
+            jQuery('#hair').css('transform', 'scaleX(-1)');
+            jQuery('#top').css('transform', 'scaleX(-1)');
+            jQuery('#bot').css('transform', 'scaleX(-1)');
+            jQuery('#board').css('transform', 'scaleX(-1)');
+            jQuery('#acc').css('transform', 'scaleX(-1)');
+            faceLeft = false;
+            jQuery('.message').css('transform', 'scaleX(-1)');
+            jQuery('#username').css('transform', 'scaleX(-1)');
+          }
+
+      }
+
+
+        function simulateKeyPress(character) {
+          jQuery.event.trigger({ type : 'keypress', which : character.charCodeAt(0) });
+        }
+
+        $(function() {
+          $('body').keypress(function(f) {
+            if (f.which == 49) {
+
+                jQuery('#userN').css('background-image', 'url(userW1.png)');
+                setTimeout(function(){ jQuery('#userN').css({'background-image': 'url(userW2.png)'}); }, 200)
+                setTimeout(function(){ jQuery('#userN').css({'background-image': 'url(userW1.png)'}); }, 400)
+                setTimeout(function(){ jQuery('#userN').css({'background-image': 'url(userW2.png)'}); }, 600)
+                setTimeout(function(){ jQuery('#userN').css({'background-image': 'url(user.png)'}); }, 800)
+                //jQuery('#userN').css('background-image', 'url(userW1.png)');
+
+                jQuery('#costume').css('background-image', 'url('+ costume +'W1.png)');
+                setTimeout(function(){ jQuery('#costume').css({'background-image': 'url('+ costume +'W2.png)'}); }, 200)
+                setTimeout(function(){ jQuery('#costume').css({'background-image': 'url('+ costume +'W1.png)'}); }, 400)
+                setTimeout(function(){ jQuery('#costume').css({'background-image': 'url('+ costume +'W2.png)'}); }, 600)
+                setTimeout(function(){ jQuery('#costume').css({'background-image': 'url('+ costume +'.png)'}); }, 800)
+
+                jQuery('#hair').css('background-image', 'url('+ hair +'W1.png)');
+                setTimeout(function(){ jQuery('#hair').css({'background-image': 'url('+ hair +'W2.png)'}); }, 200)
+                setTimeout(function(){ jQuery('#hair').css({'background-image': 'url('+ hair +'W1.png)'}); }, 400)
+                setTimeout(function(){ jQuery('#hair').css({'background-image': 'url('+ hair +'W2.png)'}); }, 600)
+                setTimeout(function(){ jQuery('#hair').css({'background-image': 'url('+ hair +'.png)'}); }, 800)
+
+                jQuery('#top').css('background-image', 'url('+ top +'W1.png)');
+                setTimeout(function(){ jQuery('#top').css({'background-image': 'url('+ top +'W2.png)'}); }, 200)
+                setTimeout(function(){ jQuery('#top').css({'background-image': 'url('+ top +'W1.png)'}); }, 400)
+                setTimeout(function(){ jQuery('#top').css({'background-image': 'url('+ top +'W2.png)'}); }, 600)
+                setTimeout(function(){ jQuery('#top').css({'background-image': 'url('+ top +'.png)'}); }, 800)
+
+                jQuery('#acc').css('background-image', 'url('+ acc +'W1.png)');
+                setTimeout(function(){ jQuery('#acc').css({'background-image': 'url('+ acc +'W2.png)'}); }, 200)
+                setTimeout(function(){ jQuery('#acc').css({'background-image': 'url('+ acc +'W1.png)'}); }, 400)
+                setTimeout(function(){ jQuery('#acc').css({'background-image': 'url('+ acc +'W2.png)'}); }, 600)
+                setTimeout(function(){ jQuery('#acc').css({'background-image': 'url('+ acc +'.png)'}); }, 800)
+            }
+            else if (f.which == 50) {
+                jQuery('#userN').css('background-image', 'url(userC1.png)');
+                setTimeout(function(){ jQuery('#userN').css('background-image', 'url(userC2.png)'); }, 200)
+                setTimeout(function(){ jQuery('#userN').css('background-image', 'url(userC1.png)'); }, 400)
+                setTimeout(function(){ jQuery('#userN').css('background-image', 'url(userC2.png)'); }, 600)
+                setTimeout(function(){ jQuery('#userN').css('background-image', 'url(user.png)'); }, 800)
+
+                jQuery('#costume').css('background-image', 'url('+ costume +'C1.png)');
+                setTimeout(function(){ jQuery('#costume').css('background-image', 'url('+ costume +'C2.png)'); }, 200)
+                setTimeout(function(){ jQuery('#costume').css('background-image', 'url('+ costume +'C1.png)'); }, 400)
+                setTimeout(function(){ jQuery('#costume').css('background-image', 'url('+ costume +'C2.png)'); }, 600)
+                setTimeout(function(){ jQuery('#costume').css('background-image', 'url('+ costume +'.png)'); }, 800)
+
+                jQuery('#hair').css('background-image', 'url('+ hair +'C1.png)');
+                setTimeout(function(){ jQuery('#hair').css('background-image', 'url('+ hair +'C2.png)'); }, 200)
+                setTimeout(function(){ jQuery('#hair').css('background-image', 'url('+ hair +'C1.png)'); }, 400)
+                setTimeout(function(){ jQuery('#hair').css('background-image', 'url('+ hair +'C2.png)'); }, 600)
+                setTimeout(function(){ jQuery('#hair').css('background-image', 'url('+ hair +'.png)'); }, 800)
+
+                jQuery('#top').css('background-image', 'url('+ top +'C1.png)');
+                setTimeout(function(){ jQuery('#top').css('background-image', 'url('+ top +'C2.png)'); }, 200)
+                setTimeout(function(){ jQuery('#top').css('background-image', 'url('+ top +'C1.png)'); }, 400)
+                setTimeout(function(){ jQuery('#top').css('background-image', 'url('+ top +'C2.png)'); }, 600)
+                setTimeout(function(){ jQuery('#top').css('background-image', 'url('+ top +'.png)'); }, 800)
+
+                jQuery('#acc').css('background-image', 'url('+ acc +'C1.png)');
+                setTimeout(function(){ jQuery('#acc').css('background-image', 'url('+ acc +'C2.png)'); }, 200)
+                setTimeout(function(){ jQuery('#acc').css('background-image', 'url('+ acc +'C1.png)'); }, 400)
+                setTimeout(function(){ jQuery('#acc').css('background-image', 'url('+ acc +'C2.png)'); }, 600)
+                setTimeout(function(){ jQuery('#acc').css('background-image', 'url('+ acc +'.png)'); }, 800)
+            }
+            else if (f.which == 51) {
+                jQuery('#userN').css('background-image', 'url(userJ.png)');
+                setTimeout(function(){ jQuery('#userN').css('background-image', 'url(user.png)'); }, 200)
+                setTimeout(function(){ jQuery('#userN').css('background-image', 'url(userJ.png)'); }, 400)
+                setTimeout(function(){ jQuery('#userN').css('background-image', 'url(user.png)'); }, 600)
+
+                jQuery('#costume').css('background-image', 'url('+ costume +'J.png)');
+                setTimeout(function(){ jQuery('#costume').css('background-image', 'url('+ costume +'.png)'); }, 200)
+                setTimeout(function(){ jQuery('#costume').css('background-image', 'url('+ costume +'J.png)'); }, 400)
+                setTimeout(function(){ jQuery('#costume').css('background-image', 'url('+ costume +'.png)'); }, 600)
+
+                jQuery('#hair').css('background-image', 'url('+ hair +'J.png)');
+                setTimeout(function(){ jQuery('#hair').css('background-image', 'url('+ hair +'.png)'); }, 200)
+                setTimeout(function(){ jQuery('#hair').css('background-image', 'url('+ hair +'J.png)'); }, 400)
+                setTimeout(function(){ jQuery('#hair').css('background-image', 'url('+ hair +'.png)'); }, 600)
+
+                jQuery('#top').css('background-image', 'url('+ top +'J.png)');
+                setTimeout(function(){ jQuery('#top').css('background-image', 'url('+ top +'.png)'); }, 200)
+                setTimeout(function(){ jQuery('#top').css('background-image', 'url('+ top +'J.png)'); }, 400)
+                setTimeout(function(){ jQuery('#top').css('background-image', 'url('+ top +'.png)'); }, 600)
+
+                jQuery('#bot').css('background-image', 'url('+ bot +'J.png)');
+                setTimeout(function(){ jQuery('#bot').css('background-image', 'url('+ bot +'.png)'); }, 200)
+                setTimeout(function(){ jQuery('#bot').css('background-image', 'url('+ bot +'J.png)'); }, 400)
+                setTimeout(function(){ jQuery('#bot').css('background-image', 'url('+ bot +'.png)'); }, 600)
+
+                jQuery('#acc').css('background-image', 'url('+ acc +'J.png)');
+                setTimeout(function(){ jQuery('#acc').css('background-image', 'url('+ acc +'.png)'); }, 200)
+                setTimeout(function(){ jQuery('#acc').css('background-image', 'url('+ acc +'J.png)'); }, 400)
+                setTimeout(function(){ jQuery('#acc').css('background-image', 'url('+ acc +'.png)'); }, 600)
+            }
+          });
+          simulateKeyPress("f");
+        });
+
+        var chatLog = "";
+        jQuery('.historyB').click(function(){
+          if (historyOpen == false) {
+            $('.msgBorder').css('opacity', '1')
+            //$('.msgBorder').append('<button class=\'closeMsg\' onclick=\"closeChat()\">X</button><div class=\"history\"></div><input id=\"msgType\"></input>');
+            $('.msgBorder').append('<div class=\"history\"></div><input id=\"msgType\"></input>');
+            $('.history').append(chatLog);
+            //$('.msgBorder').html('<input type=\'password\'></input>')
+            historyOpen = true;
+          }
+          else {
+            $('.msgBorder').css('opacity', '0')
+            var el = document.getElementById('msgType');
+            el.remove();
+            historyOpen = false;
+          }
+
+        })
+
+        var inputt = document.getElementById("screen");
+        inputt.addEventListener("keyup", function(event) {
+          if (event.keyCode === 99) {
+           event.preventDefault();
+           document.getElementById("chat").focus();
+          }
+        })
+
+
+        jQuery('.send').click(function(){
+
+          var uMsg = document.getElementById("chat").value;
+          if (uMsg == "Thats One Crazy Monkey") {
+            var monkey = document.createElement("DIV");
+            monkey.innerHTML = "<row style=\"display: flex;\"><p>sp00py_gh0st:</p><img src='monkey.gif'></row";
+            $('.history').append(monkey);
+            var monkeyYes = true;
+          }
+          var i = 0
+          while(i < 200) {
+            uMsg = uMsg.replace('ugly','awesome');
+            uMsg = uMsg.replace('fucking','really');
+            uMsg = uMsg.replace('ughy','awesome');
+            uMsg = uMsg.replace('SHOES','shoeS');
+            uMsg = uMsg.replace('i hate you','i dislike you');
+            uMsg = uMsg.replace('sexy','cool');
+            uMsg = uMsg.replace('sex','intercourse');
+            currentChat = uMsg;
+            i++;
+          }
+          jQuery('.message').css({'opacity': '0.7','height':'auto', 'width': '80px','word-wrap': 'break-word','position':'absolute'});
+          jQuery('.message').html('<center>'+uMsg+'</center>');
+          var msgHeight = $(".message").css('height');
+          if (msgHeight > 240) {
+          }
+          else if (msgHeight == '240px' ) {
+            jQuery('h4').html(msgHeight);
+            //jQuery(.'message').css({'top': '200px'});
+            jQuery('.message').css({'top':'-194px'});
+          }
+          else if (msgHeight == '224px' ) {
+            jQuery('h4').html(msgHeight);
+            //jQuery(.'message').css({'top': '200px'});
+            jQuery('.message').css({'top':'-178px'});
+          }
+          else if (msgHeight == '208px' ) {
+            jQuery('h4').html(msgHeight);
+            //jQuery(.'message').css({'top': '200px'});
+            jQuery('.message').css({'top':'-162px'});
+          }
+          else if (msgHeight == '192px' ) {
+            jQuery('h4').html(msgHeight);
+            //jQuery(.'message').css({'top': '200px'});
+            jQuery('.message').css({'top':'-146px'});
+          }
+          else if (msgHeight == '176px' ) {
+            jQuery('h4').html(msgHeight);
+            //jQuery(.'message').css({'top': '200px'});
+            jQuery('.message').css({'top':'-130px'});
+          }
+          else if (msgHeight == '160px') {
+            jQuery('h4').html(msgHeight);
+            //jQuery(.'message').css({'top': '200px'});
+            jQuery('.message').css({'top':'-114px'});
+          }
+          else if (msgHeight == '144px') {
+            jQuery('h4').html(msgHeight);
+            //jQuery(.'message').css({'top': '200px'});
+            jQuery('.message').css({'top':'-98px'});
+          }
+          else if (msgHeight == '128px') {
+            jQuery('h4').html(msgHeight);
+            //jQuery(.'message').css({'top': '200px'});
+            jQuery('.message').css({'top':'-82px'});
+          }
+          else if (msgHeight == '112px') {
+            jQuery('h4').html(msgHeight);
+            //jQuery(.'message').css({'top': '200px'});
+            jQuery('.message').css({'top':'-66px'});
+          }
+          else if (msgHeight == '96px') {
+            jQuery('h4').html(msgHeight);
+            //jQuery(.'message').css({'top': '200px'});
+            jQuery('.message').css({'top':'-50px'});
+          }
+          else if (msgHeight == '80px') {
+            jQuery('h4').html(msgHeight);
+            //jQuery(.'message').css({'top': '200px'});
+            jQuery('.message').css({'top':'-34px'});
+          }
+          else if (msgHeight == '64px') {
+            jQuery('h4').html(msgHeight);
+            //jQuery(.'message').css({'top': '200px'});
+            jQuery('.message').css({'top':'-18px'});
+          }
+          else if (msgHeight == '48px') {
+            jQuery('h4').html(msgHeight);
+            //jQuery(.'message').css({'top': '200px'});
+            jQuery('.message').css({'top':'-2px'});
+          }
+          else if (msgHeight == '32px') {
+            jQuery('h4').html(msgHeight);
+            //jQuery(.'message').css({'top': '200px'});
+            jQuery('.message').css({'top':'14px'});
+          }
+          else if (msgHeight == '16px'){
+            //var closeChat = $(".closeMsg").css('border');
+            //jQuery('h4').html(closeChat);
+            jQuery('.message').css({'top':'30px'});
+          }
+          document.getElementById("chat").value = ""
+          if (monkeyYes == true) {
+          }
+          else{
+            $( ".history" ).append('<bold>sp00py_gh0st: </bold>'+uMsg+'<br>');
+          }
+          chatLog = chatLog + 'sp00py_gh0st: ' +uMsg+'<br>';
+        });
+
+        var input = document.getElementById("screen");
+        input.addEventListener("keyup", function(event) {
+          if (event.keyCode === 13) {
+           event.preventDefault();
+           var uMsg = document.getElementById("chat").value;
+           if (uMsg == "Thats One Crazy Monkey") {
+             var monkey = document.createElement("DIV");
+             monkey.innerHTML = "<row style=\"display: flex;\"><p>sp00py_gh0st:</p><img src='monkey.gif'></row";
+             $('.history').append(monkey);
+             var monkeyYes = true;
+           }
+
+           var i = 0
+           while(i < 200) {
+             uMsg = uMsg.replace('ugly','awesome');
+             uMsg = uMsg.replace('fucking','really');
+             uMsg = uMsg.replace('ughy','awesome');
+             uMsg = uMsg.replace('SHOES','shoeS');
+             uMsg = uMsg.replace('i hate you','i dislike you');
+             uMsg = uMsg.replace('sexy','cool');
+             uMsg = uMsg.replace('sex','intercourse');
+             currentChat = uMsg;
+             i++;
+           }
+           jQuery('.message').css({'opacity': '0.7','height':'auto', 'width': '80px','word-wrap': 'break-word','position':'absolute'});
+           jQuery('.message').html('<center>'+uMsg+'</center>');
+           var msgHeight = $(".message").css('height');
+           if (msgHeight > 240) {
+           }
+           else if (msgHeight == '240px' ) {
+             jQuery('h4').html(msgHeight);
+             //jQuery(.'message').css({'top': '200px'});
+             jQuery('.message').css({'top':'-194px'});
+           }
+           else if (msgHeight == '224px' ) {
+             jQuery('h4').html(msgHeight);
+             //jQuery(.'message').css({'top': '200px'});
+             jQuery('.message').css({'top':'-178px'});
+           }
+           else if (msgHeight == '208px' ) {
+             jQuery('h4').html(msgHeight);
+             //jQuery(.'message').css({'top': '200px'});
+             jQuery('.message').css({'top':'-162px'});
+           }
+           else if (msgHeight == '192px' ) {
+             jQuery('h4').html(msgHeight);
+             //jQuery(.'message').css({'top': '200px'});
+             jQuery('.message').css({'top':'-146px'});
+           }
+           else if (msgHeight == '176px' ) {
+             jQuery('h4').html(msgHeight);
+             //jQuery(.'message').css({'top': '200px'});
+             jQuery('.message').css({'top':'-130px'});
+           }
+           else if (msgHeight == '160px') {
+             jQuery('h4').html(msgHeight);
+             //jQuery(.'message').css({'top': '200px'});
+             jQuery('.message').css({'top':'-114px'});
+           }
+           else if (msgHeight == '144px') {
+             jQuery('h4').html(msgHeight);
+             //jQuery(.'message').css({'top': '200px'});
+             jQuery('.message').css({'top':'-98px'});
+           }
+           else if (msgHeight == '128px') {
+             jQuery('h4').html(msgHeight);
+             //jQuery(.'message').css({'top': '200px'});
+             jQuery('.message').css({'top':'-82px'});
+           }
+           else if (msgHeight == '112px') {
+             jQuery('h4').html(msgHeight);
+             //jQuery(.'message').css({'top': '200px'});
+             jQuery('.message').css({'top':'-66px'});
+           }
+           else if (msgHeight == '96px') {
+             jQuery('h4').html(msgHeight);
+             //jQuery(.'message').css({'top': '200px'});
+             jQuery('.message').css({'top':'-50px'});
+           }
+           else if (msgHeight == '80px') {
+             jQuery('h4').html(msgHeight);
+             //jQuery(.'message').css({'top': '200px'});
+             jQuery('.message').css({'top':'-34px'});
+           }
+           else if (msgHeight == '64px') {
+             jQuery('h4').html(msgHeight);
+             //jQuery(.'message').css({'top': '200px'});
+             jQuery('.message').css({'top':'-18px'});
+           }
+           else if (msgHeight == '48px') {
+             jQuery('h4').html(msgHeight);
+             //jQuery(.'message').css({'top': '200px'});
+             jQuery('.message').css({'top':'-2px'});
+           }
+           else if (msgHeight == '32px') {
+             jQuery('h4').html(msgHeight);
+             //jQuery(.'message').css({'top': '200px'});
+             jQuery('.message').css({'top':'14px'});
+           }
+           else if (msgHeight == '16px'){
+             //var closeChat = $(".closeMsg").css('border');
+             //jQuery('h4').html(closeChat);
+             jQuery('.message').css({'top':'30px'});
+           }
+           document.getElementById("chat").value = ""
+           if (monkeyYes == true) {
+           }
+           else{
+             $( ".history" ).append('<bold>sp00py_gh0st: </bold>'+uMsg+'<br>');
+           }
+           if (monkeyYes == true){
+             chatLog = chatLog + "<row style=\"display: flex;\"><p>sp00py_gh0st:</p><img src='monkey.gif'></row><br>";
+             monkeyYes = false;
+           }
+           else{
+             chatLog = chatLog + 'sp00py_gh0st: ' +uMsg+'<br>';
+           }
+          }
+        });
+
+        jQuery('#chat').click(function(){
+          document.getElementById("chat").value = ""
+        })
+
+        function drag_start(event) {
+          var style = window.getComputedStyle(event.target, null);
+          event.dataTransfer.setData("text/plain",
+          (parseInt(style.getPropertyValue("left"),10) - event.clientX) + ',' + (parseInt(style.getPropertyValue("top"),10) - event.clientY));
+        }
+        function drag_over(event) {
+            event.preventDefault();
+            return false;
+        }
+        function drop(event) {
+            var offset = event.dataTransfer.getData("text/plain").split(',');
+            var dm = document.getElementById('msgChat');
+            dm.style.left = (event.clientX + parseInt(offset[0],10)) + 'px';
+            dm.style.top = (event.clientY + parseInt(offset[1],10)) + 'px';
+            event.preventDefault();
+            return false;
+        }
+        var dm = document.getElementById('msgChat');
+        dm.addEventListener('dragstart',drag_start,false);
+        document.body.addEventListener('dragover',drag_over,false);
+        document.body.addEventListener('drop',drop,false);
+
+      });
+
+    </script>
+
+  </head>
+
+  <body>
+    <div id="screen">
+      <div class="user" id="board"></div>
+      <div class="user" id="userN">
+        <div class="message"></div>
+      </div>
+      <div class="user" id="costume"></div>
+      <div class="user" id="bot"></div>
+      <div class="user" id="top"></div>
+      <div class="user" id="hair"></div>
+      <div class="user" id="acc"></div>
+      <div class="user" id="userSpacer"></div>
+      <div id='fog'></div>
+      <div id="clickUser"></div>
+      <div class='blank3'></div>
+      <input type='text' pattern="[A-Za-z]{20}" id="chat" value="Click Here or Press ENTER to Chat" onkeypress="return (event.charCode > 64 &&
+	event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" maxlength="72"></input>
+      <button class="send">SEND</button>
+
+      <button class="actions"><bold><center>A</center></bold></button>
+      <button class="inventory"><bold><center>I</center></bold></button>
+      <button class="historyB"><bold><center>C</center></bold></button>
+      <div class="msgBorder" draggable="true" id="msgChat">
+      <!--x button-->
+      <input type='button'class="closeMsg" /input>
+      </div>
+      <div class="blank1"></div>
+      <div class="blank2"></div>
+      <div class="wave"></div>
+    </div>
+
+    <h2></h2>
+    <h3></h3>
+    <h4></h4>
+    <p id='anothertext'></p>
+    <div class="timer"></div>
+
+  </body>
+
+</html>

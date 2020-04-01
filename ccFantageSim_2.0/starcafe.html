@@ -1,0 +1,457 @@
+<html>
+
+  <head>
+
+    <title>walmart fantage</title>
+
+    <style>
+      body{
+      }
+      #screen {
+        top: 100px;
+        right: 250px;
+        height: 460px;
+        width: 900px;
+        position: absolute;
+        background-image: url(starcafe.png);
+        background-repeat: no-repeat;
+        border: 2px solid grey;
+      }
+      #user{
+        height: 120px;
+        width: 80px;
+        top: 30%;
+        left: 65%;
+        /*border: 1px solid red;*/
+        background-repeat: no-repeat;
+        position: absolute;
+      }
+      .userN{
+        background-image: url(user.png);
+      }
+      .actions{
+        background-color: blue;
+        height: 40px;
+        width: 40px;
+        border-radius: 10px;
+        top: 420px;
+        right: 150px;
+        position: absolute;
+        opacity: 0.7;
+        color: white;
+        line-height: 40px;
+      }
+      .inventory{
+        background-color: blue;
+        height: 40px;
+        width: 40px;
+        border-radius: 10px;
+        top: 420px;
+        right: 200px;
+        position: absolute;
+        opacity: 0.7;
+        color: white;
+        line-height: 40px;
+      }
+      .wave {
+        position: absolute;
+        top: 265px;
+        right: 120px;
+        font-size: 30px;
+      }
+      .timer{
+        background-color: black;
+        height: 20px;
+        width: 20px;
+        position: absolute;
+      }
+      #chat {
+        position: absolute;
+        top: 95%;
+        left: 30%;
+        width: 300px;
+        height: 20px;
+        color: white;
+        background-color: black;
+        opacity: 0.7;
+      }
+      .send {
+        position: absolute;
+        top: 95%;
+        left: 64%;
+        width: 80px;
+        height: 20px;
+        color: white;
+        background-color: blue;
+        opacity: 0.9;
+      }
+      .message {
+        top: 300px;
+        position: absolute;
+        width: 100px;
+        height: 50px;
+        background-color: white;
+        opacity: 0;
+        color: black;
+        border-radius: 5px;
+        font-family: "Times New Roman", Times, serif;
+        font-size: 14px;
+      }
+      .inventOpen{
+        left: 100px;
+        height: 700px;
+        width: 1000px;
+        position: absolute;
+        background-image: url(inventory.png);
+        background-repeat:no-repeat;
+        background-size: 70%;
+      }
+      .block {
+        background-color: black;
+        opacity: 0.7;
+        height: 460px;
+        width: 900px;
+        position: absolute;
+      }
+      .historyB{
+        background-color: blue;
+        height: 40px;
+        width: 40px;
+        border-radius: 10px;
+        top: 420px;
+        right: 100px;
+        position: absolute;
+        opacity: 0.7;
+        color: white;
+        line-height: 40px;
+      }
+      .history{
+        opacity: 0;
+        position: absolute;
+        top: 265px;
+        right: 120px;
+        font-size: 30px;
+        background-color: white;
+        color: black;
+        width: 200px;
+        height: 150px;
+        border-radius: 5px;
+        border: 2px solid blue;*/
+        font-family: "Times New Roman", Times, serif;
+        font-size: 14px;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+      .cafeDoor {
+        position: absolute;
+        top: 20%;
+        left: 60%;
+        height: 20%;
+        width: 9%;
+      }
+
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+
+
+      jQuery(document).ready(function(){
+
+        document.getElementById("screen").disabled = true
+
+        var actionsOpen = false;
+        var faceLeft = true;
+        var inventOpen = false;
+        var historyOpen = false;
+
+        jQuery('#screen').click(function(e){
+
+
+          var x = $('#user').position();
+          var mX = $('.message').position();
+
+          var moveX = (1440 - e.pageX) - (900 - x.left) - 210;
+          var moveY = x.top - e.pageY + 120;
+
+          var msgX = (1440 - e.pageX) - (900 - mX.left) - 200;
+          var msgY = mX.top - e.pageY + 100;
+
+          if (x.top < 139 && x.left < 61){
+            jQuery('h1').html('cafe');
+            jQuery('#screen').css({'background-image:': 'url(starcafe.png)'});
+            jQuery('h3').html('cafe');
+          }
+
+          if (x.left > e.pageX - 330 && !((e.pageX > 560 && e.pageY > 540 && e.pageX < 850 && e.pageY < 555) || (e.pageX > 865 && e.pageY >540 && e.pageX < 943 && e.pageY < 556)
+        || ( e.pageX > 1000 && e.pageY > 526 && e.pageX < 1032 && e.pageY < 558))) {
+            jQuery('.userN').css('background-image', 'url(user.png)');
+            faceLeft = true;
+          }
+          else if (!((e.pageX > 560 && e.pageY > 540 && e.pageX < 850 && e.pageY < 555) || (e.pageX > 865 && e.pageY >540 && e.pageX < 943 && e.pageY < 556)
+        || ( e.pageX > 1000 && e.pageY > 526 && e.pageX < 1032 && e.pageY < 558))){
+            jQuery('.userN').css('background-image', 'url(userR.png)');
+            faceLeft = false;
+          }
+          jQuery('h2').html(x.top+' '+x.left);
+
+          //ORIGINAL
+
+          if ((e.pageX > 560 && e.pageY > 540 && e.pageX < 850 && e.pageY < 575) || (e.pageX > 865 && e.pageY >540 && e.pageX < 943 && e.pageY < 556)
+        || ( e.pageX > 1000 && e.pageY > 526 && e.pageX < 1032 && e.pageY < 558)){
+
+          }
+          else if (inventOpen == true){
+            if (e.pageY < 135) {
+              inventOpen = false;
+              $('.blank1').empty();
+            }
+          }
+          else if (e.pageY < 570 && e.pageX < 1170 && e.pageX > 340 && e.pageY > 310) {
+            $('#user').animate({right: '+=' +moveX, top: '+=' +(-moveY - 100)}, 600);
+            jQuery('h1').html('normal');
+            $('.message').animate({right: '+=' +msgX, top: '+=' +(-msgY - 150)}, 600);
+          }
+          //BOUNDERIES
+          /*else if (actionsOpen = true) {
+            if (e.pageX > 1017 && e.pageX < 1117) {
+
+            }
+            else{
+              $('#user').animate({right: '+=' +moveX, top: '+=' +(-moveY - 200)}, 600);
+              $('.message').animate({right: '+=' +moveX, top: '+=' +(-moveY)}, 600);
+            }
+          }
+          */else if (e.pageX < 1170 && e.pageX > 340 && e.pageY > 314){
+            $('#user').animate({right: '+=' +moveX, 'top': '355px'}, 600);
+            jQuery('h1').html('bottom');
+            $('.message').animate({right: '+=' +msgX, 'top': '305px'}, 600);
+          }
+          else if (e.pageX > 1170 && e.pageY > 575 && e.pageY > 305){
+            $('#user').animate({'right': '-20px', 'top': '355px'}, 600);
+            jQuery('h1').html('botRight');
+            $('.message').animate({'right': '-20px', 'top': '305px'}, 600);
+          }
+          else if (e.pageX < 320 && e.pageY > 575 && e.pageY > 305){
+            $('#user').animate({'right': '820px', 'top': '355px'}, 600);
+            jQuery('h1').html('botLeft');
+            $('.message').animate({'right': '820px', 'top': '305px'}, 600);
+          }
+          else if (e.pageX < 320 && e.pageY > 305){
+            $('#user').animate({top: '+=' +(-moveY - 100), 'right': '830px'}, 600);
+            jQuery('h1').html('left');
+            $('.message').animate({top: '+=' +(-msgY - 150), 'right': '820px'}, 600);
+          }
+          else if (e.pageX > 1170 && e.pageY > 305){
+            $('#user').animate({top: '+=' +(-moveY - 100), 'right': '-20px'}, 600);
+            jQuery('h1').html('right');
+            $('.message').animate({top: '+=' +(-msgY - 150), 'right': '-20px'}, 600);
+          }
+          else if (e.pageY < 315 && e.pageX > 339 && e.pageX < 1170){
+            $('#user').animate({right: '+=' +moveX, 'top': '90px'}, 600);
+            jQuery('h1').html('top');
+            $('.message').animate({right: '+=' +moveX, 'top': '55px'}, 600);
+          }
+          else if (e.pageY < 575 && e.pageX < 340 && e.pageX < 1170){
+            $('#user').animate({'right': '820px', 'top': '90px'}, 600);
+            jQuery('h1').html('topLeft');
+            $('.message').animate({'right': '820px', 'top': '55px'}, 600);
+          }
+          else{
+            $('#user').animate({'right': '-20px', 'top': '90px'}, 600);
+            jQuery('h1').html('topLeft');
+            $('.message').animate({'right': '-20px', 'top': '55px'}, 600);
+          }
+
+        });
+
+        jQuery('.inventOpen').click(function(){
+          if (e.pageY < 131) {
+            jQuery('h1').html('bitchhh');
+            $(".blank1").empty();
+            inventOpen = false;
+          }
+
+        })
+
+        jQuery('.actions').click(function(){
+          if (actionsOpen == false) {
+            $(".wave").css({"background-color": "blue", "height": "150px", "width": "100px", "opacity": "0.5", 'color': 'white'});
+            jQuery('.wave').html('jump');
+            actionsOpen = true;
+          }
+          else {
+            $(".wave").css({"background-color": "", "height": "", "width": "", "opacity": "", 'color': ''});
+            jQuery('.wave').html('');
+            actionsOpen = false;
+          }
+
+        jQuery('.wave').click(function(){
+
+          if (faceLeft == true) {
+            jQuery('#user').css('background-image', 'url(userW1.png)');
+          }
+          else {
+            jQuery('#user').css('background-image', 'url(userW1R.png)');
+          }
+          jQuery('.timer').animate({'left':'200'}, 100);
+          //jQuery('.userN').css('background-image', 'url(user.png)');
+          $(".wave").css({"background-color": "", "height": "", "width": "", "opacity": "", 'color': ''});
+          jQuery('.actions').html('');
+          //actionsOpen = false;
+
+        })
+
+        });
+
+        jQuery('.inventory').click(function(){
+
+          $(".blank1").append("<div class='block'></div>");
+          $(".blank1").append("<div class='inventOpen'></div>");
+          inventOpen = true;
+
+        });
+
+        jQuery('.historyB').click(function(){
+          if (historyOpen == false) {
+            $('.history').css('opacity', '1')
+            historyOpen = true;
+          }
+          else {
+            $('.history').css('opacity', '0')
+            historyOpen = false;
+          }
+
+        })
+
+        /*window.setInterval(function() {
+          var elem = document.getElementByClassName('history');
+          elem.scrollTop = elem.scrollHeight;
+        }, 5000);*/
+
+        function simulateKeyPress(character) {
+          jQuery.event.trigger({ type : 'keypress', which : character.charCodeAt(0) });
+        }
+
+        $(function() {
+          $('body').keypress(function(f) {
+            if (f.which == 49) {
+              if (faceLeft == true) {
+                jQuery('.userN').css('background-image', 'url(userW1.png)');
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(userW2.png)'); }, 200)
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(userW1.png)'); }, 400)
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(userW2.png)'); }, 600)
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(user.png)'); }, 800)
+                //jQuery('.userN').css('background-image', 'url(userW1.png)');
+              }
+              else{
+                jQuery('.userN').css('background-image', 'url(userW1R.png)');
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(userW2R.png)'); }, 200)
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(userW1R.png)'); }, 400)
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(userW2R.png)'); }, 600)
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(userR.png)'); }, 800)
+              }
+            }
+            else if (f.which == 50) {
+              if (faceLeft == true) {
+                jQuery('.userN').css('background-image', 'url(userC1.png)');
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(userC2.png)'); }, 200)
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(userC1.png)'); }, 400)
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(userC2.png)'); }, 600)
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(user.png)'); }, 800)
+              }
+              else{
+                jQuery('.userN').css('background-image', 'url(userC1R.png)');
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(userC2R.png)'); }, 200)
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(userC1R.png)'); }, 400)
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(userC2R.png)'); }, 600)
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(userR.png)'); }, 800)
+              }
+            }
+            else if (f.which == 51) {
+              if (faceLeft == true) {
+                jQuery('.userN').css('background-image', 'url(userJ.png)');
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(user.png)'); }, 200)
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(userJ.png)'); }, 400)
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(user.png)'); }, 600)
+              }
+              else{
+                jQuery('.userN').css('background-image', 'url(userJR.png)');
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(userR.png)'); }, 200)
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(userJR.png)'); }, 400)
+                setTimeout(function(){ jQuery('.userN').css('background-image', 'url(userR.png)'); }, 600)
+              }
+            }
+            else if (f.which == 52) {
+              jQuery('.userN').css({'background-size':'40%', 'height': '1000px', 'width':'1000px;'});
+            }
+            else if (f.which == 53) {
+              jQuery('.userN').css({'background-size':'87.5%','height': '120px', 'width': '80px'});
+            }
+          });
+          simulateKeyPress("f");
+        });
+
+
+        jQuery('.send').click(function(){
+
+          var uMsg = document.getElementById("chat").value;
+          jQuery('.message').css({'opacity': '0.7', 'height': '40px'});
+          jQuery('.message').html('<center>'+uMsg+'</center>');
+          document.getElementById("chat").value = ""
+          $( ".history" ).append('crystal: '+uMsg+'<br>');
+          setTimeout(function(){ jQuery('.message').css('opacity', '0'); }, 4000);
+
+        });
+
+        var input = document.getElementById("screen");
+        input.addEventListener("keyup", function(event) {
+          if (event.keyCode === 13) {
+           event.preventDefault();
+           var uMsg = document.getElementById("chat").value;
+           jQuery('.message').css({'opacity': '0.7', 'height': '40px'});
+           jQuery('.message').html('<center>'+uMsg+'</center>');
+           document.getElementById("chat").value = ""
+           $( ".history" ).append('crystal: '+uMsg+'<br>');
+           setTimeout(function(){ jQuery('.message').css('opacity', '0'); }, 4000);
+          }
+
+        });
+
+        jQuery('#chat').click(function(){
+          document.getElementById("chat").value = ""
+        })
+
+      });
+
+    </script>
+
+  </head>
+
+  <body>
+    <div id="screen">
+      <div class="cafeDoor"></div>
+      <div id="user" class="userN"></div>
+      <div id='user' class="message"></div>
+
+      <input type='text' pattern="[A-Za-z]{20}" id="chat" value="Click Here or Press ENTER to Chat"></input>
+      <button class="send">SEND</button>
+
+      <button class="actions"><bold><center>A</center></bold></button>
+      <button class="inventory"><bold><center>I</center></bold></button>
+      <button class="historyB"><bold><center>C</center></bold></button>
+      <div class="history"></div>
+      <div class="blank1"></div>
+      <div class="wave"></div>
+
+    </div>
+
+    <h1></h1>
+    <h2></h2>
+    <h3></h3>
+    <div class="timer"></div>
+
+  </body>
+
+</html>
